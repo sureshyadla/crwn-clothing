@@ -6,6 +6,7 @@ import {selectCartItemsCount} from '../../redux/cart/cart.selectors';
 
 import './cart-icon.styles.scss';
 import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
 
 const CartIcon = ({toggleCartHidden, itemCount}) => (
     <div className='cart-icon' onClick={toggleCartHidden}>
@@ -18,10 +19,8 @@ const mapDispatchToProps = dispatch => ({
     toggleCartHidden: () => dispatch(toggleCartHidden())
 })
 
-const mapStateToProps = (state) =>{
-    console.log("I am called");
-    return ({
-    itemCount: selectCartItemsCount(state)
-})}
+const mapStateToProps = createStructuredSelector({
+    itemCount: selectCartItemsCount
+})
 
 export default connect(mapStateToProps, mapDispatchToProps) (CartIcon);
